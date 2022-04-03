@@ -47,6 +47,14 @@ class FirebaseService
         return $this->db->getReference('jardin')->update($updates);
     }
 
+    public function setMaxHumedad($id_maceta, $maximo)
+    {
+        $updates = [
+            $id_maceta.'/humMax' => $maximo,
+        ];
+        return $this->db->getReference('jardin')->update($updates);
+    }
+
     public function setStateBomba($id_maceta, $state)
     {
         $updates = [

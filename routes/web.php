@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\JardinesController;
 use App\Http\Controllers\BombaController;
+use App\Http\Controllers\HumedadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,5 @@ Route::group(['middleware' => ['auth']], function(){
 
     // IoT
     Route::post('/stateBomba', [BombaController::class, 'stateBomba'])->name('state.bomba');
+    Route::post('/humMax', [HumedadController::class, 'setHumMax'])->name('humMax');
 });

@@ -34,18 +34,18 @@
 													</div>
 												</div>
 												<h1 class="mt-1 mb-3 text-success">29 Hr</h1>
-												<div class="mb-0">
+												<!-- <div class="mb-0">
 													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 36 </span>
 													<span class="text-muted">Limite maximo actual</span>
-												</div>
+												</div> -->
 												<div class="mb-0">
 													<!-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span> -->
 													<span class="text-muted">Limitar</span>
 												</div>
-												<form>
+												<form action="{{ route('humMax') }}" method="post">
 													@csrf
 													<input name="humMax" type="number" class="form-control mb-2" autocomplete="off">
-													<input name="id_maceta" type="hidden" class="form-control" autocomplete="off" value="colmena1">
+													<input name="id_maceta" type="hidden" class="form-control" autocomplete="off" value="maceta1">
 													<button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enviar</button>
 												</form>
 											</div>
