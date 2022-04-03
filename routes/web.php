@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\JardinesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/auth/login', function () {
-    return view('login');
-});
+Route::post('/login', [AuthController::class, 'iniciarSesion'])->name('signIn');
+Route::post('/signup', [AuthController::class, 'registrar'])->name('signUp');
+Route::get('/auth/login', [AuthController::class, 'index'])->name('login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/jardines', [JardinesController::class, 'index']);
+    Route::get('/logout', [DashboardController::class, 'logout']);
+
+    Route::get('/perfil', [PerfilController::class, 'index']);
+    Route::post('/updatePhoto', [PerfilController::class, 'changePhoto'])->name('updatePhoto');
+    Route::post('/changeDataUser', [PerfilController::class, 'changeDataUser'])->name('updateUser');
 });

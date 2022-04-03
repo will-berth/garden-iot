@@ -1,0 +1,31 @@
+.photoProfile{
+    width: 128px;
+    min-height: 128px;
+    margin: 0 auto;
+    position: relative;
+}
+.photoProfile > img{
+    object-fit: cover;
+    min-height: 128px;
+}
+
+.iconEditPhoto{
+    color: white;
+}
+.btn-editPhoto{
+    border: none !important;
+}
+
+.photoProfileOverlay{
+    background-color: rgba(0, 0, 0, 0.152);
+    position: absolute;
+    z-index: 80;
+    width: 128px;
+    min-height: 128px;
+    visibility: hidden;
+}
+
+.photoProfile:hover .photoProfileOverlay{
+    visibility: visible;
+    cursor: pointer;
+}
