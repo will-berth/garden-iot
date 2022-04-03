@@ -1,92 +1,74 @@
 @extends('layouts.app')
 @section('contenido')
 
-					<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+<div class="row">
+	<div class="col-9">
+		<h1 class="h3 mb-3"><strong>Dashboard</strong> </h1>
+	</div>
+	<div class="col-3">
+		<select class="form-select mb-3">
+			<option selected="">Maceta 1</option>
+			<option>One</option>
+			<option>Two</option>
+			<option>Three</option>
+        </select>
+	</div>
+</div>
 
 					<div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
+						<div class="col-xl-3 col-xxl-5 d-flex">
 							<div class="w-100">
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12">
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Sales</h5>
+														<h5 class="card-title">Humedad</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
+															<i class="align-middle" data-feather="cloud-drizzle"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
+												<h1 class="mt-1 mb-3 text-success">29 Hr</h1>
 												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-													<span class="text-muted">Since last week</span>
+													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 36 </span>
+													<span class="text-muted">Limite maximo actual</span>
 												</div>
+												<div class="mb-0">
+													<!-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span> -->
+													<span class="text-muted">Limitar</span>
+												</div>
+												<form>
+													@csrf
+													<input name="humMax" type="number" class="form-control mb-2" autocomplete="off">
+													<input name="id_maceta" type="hidden" class="form-control" autocomplete="off" value="colmena1">
+													<button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enviar</button>
+												</form>
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Visitors</h5>
+														<h5 class="card-title">Bomba</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
+															<i class="align-middle" data-feather="aperture"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
+												<h1 id="stateBomba" class="mt-1 mb-3">Encendido</h1>
 												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Earnings</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">$21.300</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="shopping-cart"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-													<span class="text-muted">Since last week</span>
+													<label class="form-check form-switch">
+														<input id="offOnBomba" class="form-check-input" type="checkbox" checked="">
+														<span class="form-check-label">Off / On</span>
+													</label>
 												</div>
 											</div>
 										</div>
@@ -95,11 +77,11 @@
 							</div>
 						</div>
 
-						<div class="col-xl-6 col-xxl-7">
+						<div class="col-xl-9 col-xxl-7">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Recent Movement</h5>
+									<h5 class="card-title mb-0">Movimientos de humedad</h5>
 								</div>
 								<div class="card-body py-3">
 									<div class="chart chart-sm">
@@ -110,7 +92,7 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
@@ -264,5 +246,5 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 @endsection

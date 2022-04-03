@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-require './vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
@@ -14,7 +14,7 @@ class FirebaseService
 
     public function __construct()
     {
-        $this->firebase = (new Factory)->withServiceAccount('./key/test-int-2851b.json')->withDatabaseUri('https://test-int-2851b-default-rtdb.firebaseio.com');
+        $this->firebase = (new Factory)->withServiceAccount('../key/test-int-2851b.json')->withDatabaseUri('https://test-int-2851b-default-rtdb.firebaseio.com');
         $this->db = $this->firebase->createDatabase();
     }
 
@@ -36,6 +36,23 @@ class FirebaseService
 
         $value = $snapshot->getValue();
         return $value;
+    }
+
+    public function setMinMaxHumedad($id_maceta, $minimo, $maximo)
+    {
+        $updates = [
+            $id_maceta.'/humMax' => $maximo,
+            $id_maceta.'/humMin' => $minimo,
+        ];
+        return $this->db->getReference('jardin')->update($updates);
+    }
+
+    public function setStateBomba($id_maceta, $state)
+    {
+        $updates = [
+            $id_maceta.'/bomba' => $state,
+        ];
+        return $this->db->getReference('jardin')->update($updates);
     }
 
     // Registrar
