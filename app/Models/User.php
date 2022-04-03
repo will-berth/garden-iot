@@ -1,44 +1,80 @@
 <?php
 
 namespace App\Models;
+use App\Services\FirebaseService;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
-class User extends Authenticatable
+class User
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    private $email;
+    private $name;
+    private $photoURI;
+    private $uid;
+    private static $service;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    public function __construct($email, $name, $photoURI, $uid)
+    {
+        $this->email = $email;
+        $this->name = $name;
+        $this->photoURI = $photoURI;
+        $this->uid = $uid;
+    }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getPhotoUri()
+    {
+        return $this->photoURI;
+    }
+
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    public static function getUserLog($email, $pass)
+    {
+        $service = new FirebaseService();
+        $result = $service->signIn($email, $pass);
+        if($result['status'])
+        {
+            $uriPhoto = '';
+            $resEmail = $result['data']->data()['email'];
+            $resName = $result['data']->data()['displayName'];
+            $uid = $result['data']->data()['localId'];
+            if($result['data']->data()['profilePicture'] != '')
+            {
+                $uriPhoto = $result['data']->data()['profilePicture'];
+            }
+
+            return new User($resEmail, $resName, $uriPhoto, $uid);
+        }
+        // return $result['status'];
+    }
+
+    public static function createUser($email, $pass, $name)
+    {
+        $service = new FirebaseService();
+        $result = $service->signUp($email, $pass, $name);
+        return $result;
+    }
+
+    public static function updatePhoto($uri, $uidUser)
+    {
+        $service = new FirebaseService();
+        $response = $service->updatePhotoURI($uri, $uidUser);
+    }
+
+    public static function updateInfoUser($name, $email, $uidUser)
+    {
+        $service = new FirebaseService();
+        $response = $service->updateDataUser($name, $email, $uidUser);
+    }
 }

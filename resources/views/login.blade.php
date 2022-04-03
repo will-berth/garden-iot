@@ -10,8 +10,10 @@
 <body>
 
 <div class="container" id="container">
+@include('sweetalert::alert')
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<form action="/signup" method="post">
+			@csrf
 			<h1>Crea una cuenta</h1>
 			<!-- <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -19,14 +21,15 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your email for registration</span> -->
-			<input type="text" placeholder="Nombre" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Registrar</button>
+			<input type="text" placeholder="Nombre" name="name"/>
+			<input type="email" placeholder="Email" name="email"/>
+			<input type="password" placeholder="Password" name="pass"/>
+			<button type="submit">Registrar</button>
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<form action="/login" method="post">
+			@csrf
 			<h1>Iniciar sesión</h1>
 			<!-- <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -34,10 +37,10 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div> -->
 			<!-- <span>or use your account</span> -->
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
+			<input type="email" placeholder="Email" name="email"/>
+			<input type="password" placeholder="Password" name="pass"/>
 			<!-- <a href="#">Forgot your password?</a> -->
-			<button>Iniciar sesión</button>
+			<button type="submit">Iniciar sesión</button>
 		</form>
 	</div>
 	<div class="overlay-container">
