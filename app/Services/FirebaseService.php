@@ -6,6 +6,7 @@ require '../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
 use Kreait\Firebase\Exception\Auth\EmailExists;
+use App\Models\Maceta;
 
 class FirebaseService
 {
@@ -130,5 +131,35 @@ class FirebaseService
         ];
 
         return $auth->updateUser($uidUser, $properties);
+    }
+
+    public function addMaceta($administrador, $tipo, $limite, $idSensorHum)
+    {
+        //
+        return $this->db->getReference('jardin')->push([
+            'bomba' => 0,
+            'humedad' => [
+                'humedadAct' => 0,
+                'id_sensor' => $idSensorHum,
+                'limite' => $limite,
+            ],
+            'administrador' => $administrador,
+            'tipo' => $tipo,
+        ]);
+    }
+
+    public function addMacetaTest(Maceta $maceta)
+    {
+        //
+        return $this->db->getReference('jardin')->push([
+            'bomba' => 0,
+            'humedad' => [
+                'humedadAct' => 0,
+                'id_sensor' => $maceta->getId_sensor(),
+                'limite' => $maceta->getLimite(),
+            ],
+            'administrador' => $maceta->getAdmin(),
+            'tipo' => $maceta->getTipo(),
+        ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\JardinesController;
 use App\Http\Controllers\BombaController;
 use App\Http\Controllers\HumedadController;
+use App\Http\Controllers\MacetaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/jardines', [JardinesController::class, 'index']);
     Route::get('/logout', [DashboardController::class, 'logout']);
 
+    Route::get('/agregar', [MacetaController::class, 'index']);
+    Route::post('/nuevaMaceta', [MacetaController::class, 'registrarMaceta'])->name('nuevaMaceta');
     Route::get('/perfil', [PerfilController::class, 'index']);
     Route::post('/updatePhoto', [PerfilController::class, 'changePhoto'])->name('updatePhoto');
     Route::post('/changeDataUser', [PerfilController::class, 'changeDataUser'])->name('updateUser');

@@ -58,7 +58,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-blank.html">
+						<a class="sidebar-link" href="/agregar">
               <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Agregar</span>
             </a>
 					</li>
