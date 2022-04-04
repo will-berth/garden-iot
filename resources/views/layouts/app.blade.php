@@ -39,8 +39,8 @@
 						Modulos
 					</li>
 
-					<li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
-						<a class="sidebar-link" href="dashboard">
+					<li class="sidebar-item {{ request()->is('/') ? 'active' : '' }}">
+						<a class="sidebar-link" href="/">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>
@@ -54,6 +54,12 @@
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-blank.html">
               <i class="align-middle" data-feather="book"></i> <span class="align-middle">Historico</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-blank.html">
+              <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Agregar</span>
             </a>
 					</li>
 
@@ -126,6 +132,7 @@
 				}
 			});
 		}
+		function getDataMaceta(id_maceta){}
 		$(document).ready(function(){
 			$.ajaxSetup({
 				headers: {

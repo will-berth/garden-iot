@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'uid' => $user->getUid(),
             ];
             $request->session()->put('authenticated', $dataAuth);
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/');
             // return view('dashboard');
         }
         alert()->image(
