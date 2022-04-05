@@ -135,68 +135,7 @@
 			});
 		}
 		function getDataMaceta(id_maceta){}
-		$(document).ready(function(){
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-			$('#offOnBomba').click(function(){
-				if ($('#offOnBomba').is(":checked")){
-					stateBomba(1)
-					$('#stateBomba').text('Encendido')
-				}else{
-					stateBomba(0)
-					$('#stateBomba').text('Apagado')
-				}
-			})
-			setInterval(function(){
-				$.ajax({
-					type : 'POST',
-					url  : "{{route('humedadAct')}}",
-					data:  {'id_maceta': 'maceta1'},
-					success: function(response){
-						let {humedadAct, limite} = response;
-						$('#headLimit').text(` ${limite} `);
-						if(humedadAct > limite){
-							// rojo
-							$('#getHumedadAct').removeClass('text-success');
-							$('#getHumedadAct').addClass('text-danger');
-							$('#getHumedadAct').text(`${humedadAct} Hr`);
-						}else{
-							$('#getHumedadAct').removeClass('text-danger');
-							$('#getHumedadAct').addClass('text-success');
-							$('#getHumedadAct').text(`${humedadAct} Hr`);
-							// verde
-						}
-					}
-				});
-			}, 5000);
-		})
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			$.ajax({
-				url: 'dataTables/traductor.js',
-				dataType: 'script',
-				async: false
-			});    
-			let tableAdmin = $('#readHumedad').DataTable({
-				"ajax": {
-					"url": "{{route('getHistorico')}}",
-					"method": "POST"
-				},
-				"columns": [
-					{ "data": "fecha" },
-					{ "data": "valor"},
-				],
-			});
-		})
-	</script>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
+		function createGrafics(labelsGrafic, dataGrafic){
 			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
 			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
@@ -205,26 +144,13 @@
 			new Chart(document.getElementById("chartjs-dashboard-line"), {
 				type: "line",
 				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					labels: labelsGrafic,
 					datasets: [{
-						label: "Sales ($)",
+						label: "Humedad",
 						fill: true,
 						backgroundColor: gradient,
 						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
+						data: dataGrafic
 					}]
 				},
 				options: {
@@ -263,6 +189,84 @@
 					}
 				}
 			});
+		}
+		$(document).ready(function(){
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			$('#offOnBomba').click(function(){
+				if ($('#offOnBomba').is(":checked")){
+					stateBomba(1)
+					$('#stateBomba').text('Encendido')
+				}else{
+					stateBomba(0)
+					$('#stateBomba').text('Apagado')
+				}
+			})
+				$.ajax({
+					type : 'GET',
+					url  : "{{route('getHistorico')}}",
+					success: function(response){
+						let labels = [];
+						let data = [];
+						for(let registro in response){
+							let {fecha, valor} = response[registro];
+							labels.push(fecha);
+							data.push(valor)
+						}
+						createGrafics(labels, data)
+					}
+				});
+			setInterval(function(){
+				$.ajax({
+					type : 'POST',
+					url  : "{{route('humedadAct')}}",
+					data:  {'id_maceta': 'maceta1'},
+					success: function(response){
+						let {humedadAct, limite} = response;
+						$('#headLimit').text(` ${limite} `);
+						if(humedadAct > limite){
+							// rojo
+							$('#getHumedadAct').removeClass('text-success');
+							$('#getHumedadAct').addClass('text-danger');
+							$('#getHumedadAct').text(`${humedadAct} Hr`);
+						}else{
+							$('#getHumedadAct').removeClass('text-danger');
+							$('#getHumedadAct').addClass('text-success');
+							$('#getHumedadAct').text(`${humedadAct} Hr`);
+							// verde
+						}
+					}
+				});
+			}, 5000);
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			// $.ajax({
+			// 	url: 'dataTables/traductor.js',
+			// 	dataType: 'script',
+			// 	async: false
+			// });    
+			// let tableAdmin = $('#readHumedad').DataTable({
+			// 	"ajax": {
+			// 		"url": "{{route('getHistorico')}}",
+			// 		"method": "POST"
+			// 	},
+			// 	"columns": [
+			// 		{ "data": "fecha" },
+			// 		{ "data": "valor"},
+			// 	],
+			// });
+		})
+	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			
 		});
 	</script>
 	<script>

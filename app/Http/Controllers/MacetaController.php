@@ -30,13 +30,10 @@ class MacetaController extends Controller
         return redirect()->back();
     }
 
-    public function getRegistros(Request $request)
+    public function getRegistros()
     {
         // $id_maceta = $request->id_maceta;
-        $data['data'] = [];
-        $data['data']['vista'] = 2;
-        $data['data']['fecha'] = '23-05-2022';
-        $data['data']['valor'] = 23;
+        $data = Maceta::getHistorio();
 
         return $data;
     }

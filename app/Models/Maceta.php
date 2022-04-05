@@ -48,4 +48,11 @@ class Maceta
         $response = $service->addMacetaTest($maceta);
         return $response;
     }
+
+    public static function getHistorio()
+    {
+        $service = new FirebaseService();
+        $registros = $service->getHistoricos();
+        return $registros;
+    }
 }
