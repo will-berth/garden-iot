@@ -45,4 +45,15 @@ class MacetaController extends Controller
 
         return $data;
     }
+
+    public function getHistoricosData()
+    {
+        $json['data'] = [];
+        $data = Maceta::getHistorio();
+        foreach ($data as &$valor) {
+            $json['data'][] = $valor;
+        }
+
+        return $json;
+    }
 }

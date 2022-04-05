@@ -53,7 +53,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-blank.html">
+						<a class="sidebar-link" href="/historico">
               <i class="align-middle" data-feather="book"></i> <span class="align-middle">Historico</span>
             </a>
 					</li>
@@ -290,21 +290,21 @@
 
 	<script>
 		$(document).ready(function() {
-			// $.ajax({
-			// 	url: 'dataTables/traductor.js',
-			// 	dataType: 'script',
-			// 	async: false
-			// });    
-			// let tableAdmin = $('#readHumedad').DataTable({
-			// 	"ajax": {
-			// 		"url": "{{route('getHistorico')}}",
-			// 		"method": "POST"
-			// 	},
-			// 	"columns": [
-			// 		{ "data": "fecha" },
-			// 		{ "data": "valor"},
-			// 	],
-			// });
+			$.ajax({
+				url: 'dataTables/traductor.js',
+				dataType: 'script',
+				async: false
+			});    
+			let tableAdmin = $('#readHumedad').DataTable({
+				"ajax": {
+					"url": "{{route('getHistoricosData')}}",
+					"method": "POST"
+				},
+				"columns": [
+					{ "data": "fecha" },
+					{ "data": "valor"},
+				],
+			});
 		})
 	</script>
 

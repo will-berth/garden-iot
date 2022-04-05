@@ -15,7 +15,7 @@ class FirebaseService
 
     public function __construct()
     {
-        $this->firebase = (new Factory)->withServiceAccount('../key/test-int-2851b.json')->withDatabaseUri('https://test-int-2851b-default-rtdb.firebaseio.com');
+        $this->firebase = (new Factory)->withServiceAccount('../key/test-int-2851b.json')->withDatabaseUri('https://esp8266-8ed22-default-rtdb.firebaseio.com');
         $this->db = $this->firebase->createDatabase();
     }
 
