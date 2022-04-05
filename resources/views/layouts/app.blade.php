@@ -157,6 +157,7 @@
 					data:  {'id_maceta': 'maceta1'},
 					success: function(response){
 						let {humedadAct, limite} = response;
+						$('#headLimit').text(` ${limite} `);
 						if(humedadAct > limite){
 							// rojo
 							$('#getHumedadAct').removeClass('text-success');

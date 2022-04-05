@@ -34,10 +34,10 @@
 													</div>
 												</div>
 												<h1 id="getHumedadAct" class="mt-1 mb-3 text-success">-- Hr</h1>
-												<!-- <div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 36 </span>
-													<span class="text-muted">Limite maximo actual</span>
-												</div> -->
+												<div class="mb-0">
+													<span class="text-info" id="headLimit"> <i class="mdi mdi-arrow-bottom-right"></i> -- </span>
+													<span class="text-muted">Limite actual</span>
+												</div>
 												<div class="mb-0">
 													<!-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span> -->
 													<span class="text-muted">Limitar</span>
