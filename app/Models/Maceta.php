@@ -55,4 +55,11 @@ class Maceta
         $registros = $service->getHistoricos();
         return $registros;
     }
+
+    public function getInfo($id_maceta)
+    {
+        $service = new FirebaseService();
+        $info = $service->getInfoMaceta($id_maceta);
+        return $info;
+    }
 }

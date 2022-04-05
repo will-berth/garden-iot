@@ -37,4 +37,12 @@ class MacetaController extends Controller
 
         return $data;
     }
+
+    public function getInfo(Request $request)
+    {
+        $id = $request->id_maceta;
+        $data = Maceta::getInfo($id);
+
+        return $data;
+    }
 }

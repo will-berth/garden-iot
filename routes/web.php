@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/agregar', [MacetaController::class, 'index']);
     Route::post('/nuevaMaceta', [MacetaController::class, 'registrarMaceta'])->name('nuevaMaceta');
     Route::get('/getRegistros', [MacetaController::class, 'getRegistros'])->name('getHistorico');
+    Route::post('/infoMaceta', [MacetaController::class, 'getInfo'])->name('getInfoMaceta');
     Route::get('/perfil', [PerfilController::class, 'index']);
     Route::post('/updatePhoto', [PerfilController::class, 'changePhoto'])->name('updatePhoto');
     Route::post('/changeDataUser', [PerfilController::class, 'changeDataUser'])->name('updateUser');

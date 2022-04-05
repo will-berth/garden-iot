@@ -183,4 +183,12 @@ class FirebaseService
 
         return $response;
     }
+
+
+    public function getInfoMaceta($id_maceta) {
+        $reference = $this->db->getReference('jardin/maceta1');
+        $snapshot = $reference->getSnapshot();
+        $info = $snapshot->getValue();
+        return $info;
+    }
 }

@@ -134,7 +134,16 @@
 				}
 			});
 		}
-		function getDataMaceta(id_maceta){}
+		function getDataMaceta(id_maceta, callback){
+			$.ajax({
+				type : 'POST',
+				url  : "{{route('humedadAct')}}",
+				data:  {'id_maceta': 'maceta1'},
+				success: function(response){
+					callback(response);
+				}
+			});
+		}
 		function createGrafics(labelsGrafic, dataGrafic){
 			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
@@ -196,6 +205,39 @@
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				}
 			});
+			getDataMaceta('maceta1', function(humedad){
+
+				$.ajax({
+					type : 'POST',
+					url  : "{{route('getInfoMaceta')}}",
+					data:  {'id_maceta': 'maceta1'},
+					success: function(response){
+						let {administrador, bomba, tipo} = response;
+						$('#headAdmin').text(administrador);
+						$('#headTipo').text(tipo)
+						if(bomba == 0){
+							$('#stateBomba').text('Apagado')
+						}else{
+							$('#stateBomba').text('Encendido')
+							$('#offOnBomba').attr('checked', '')
+						}
+
+						let {humedadAct, limite} = humedad;
+						$('#headLimit').text(` ${limite} `);
+						if(humedadAct > limite){
+							// rojo
+							$('#getHumedadAct').removeClass('text-success');
+							$('#getHumedadAct').addClass('text-danger');
+							$('#getHumedadAct').text(`${humedadAct} Hr`);
+						}else{
+							$('#getHumedadAct').removeClass('text-danger');
+							$('#getHumedadAct').addClass('text-success');
+							$('#getHumedadAct').text(`${humedadAct} Hr`);
+							// verde
+						}
+					}
+				});
+			})
 			$('#offOnBomba').click(function(){
 				if ($('#offOnBomba').is(":checked")){
 					stateBomba(1)
@@ -205,20 +247,22 @@
 					$('#stateBomba').text('Apagado')
 				}
 			})
-				$.ajax({
-					type : 'GET',
-					url  : "{{route('getHistorico')}}",
-					success: function(response){
-						let labels = [];
-						let data = [];
-						for(let registro in response){
-							let {fecha, valor} = response[registro];
-							labels.push(fecha);
-							data.push(valor)
-						}
-						createGrafics(labels, data)
+
+			$.ajax({
+				type : 'GET',
+				url  : "{{route('getHistorico')}}",
+				success: function(response){
+					let labels = [];
+					let data = [];
+					for(let registro in response){
+						let {fecha, valor} = response[registro];
+						labels.push(fecha);
+						data.push(valor)
 					}
-				});
+					createGrafics(labels, data)
+				}
+			});
+			
 			setInterval(function(){
 				$.ajax({
 					type : 'POST',
@@ -264,11 +308,6 @@
 		})
 	</script>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			
-		});
-	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Pie chart

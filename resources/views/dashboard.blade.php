@@ -5,21 +5,53 @@
 	<div class="col-9">
 		<h1 class="h3 mb-3"><strong>Dashboard</strong> </h1>
 	</div>
-	<div class="col-3">
+	<!-- <div class="col-3">
 		<select class="form-select mb-3">
 			<option selected="">Maceta 1</option>
 			<option>One</option>
 			<option>Two</option>
 			<option>Three</option>
         </select>
-	</div>
+	</div> -->
 </div>
 
 					<div class="row">
-						<div class="col-xl-3 col-xxl-5 d-flex">
+						<div class="col-xl-12 col-xxl-5 d-flex">
 							<div class="w-100">
 								<div class="row">
-									<div class="col-sm-12">
+									<div class="col-sm-4">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">Administrador</h5>
+													</div>
+
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<i class="align-middle" data-feather="user-check"></i>
+														</div>
+													</div>
+												</div>
+												<h3 id="headAdmin" class="mt-1 mb-3 text-info">----</h3>
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">Tipo de Maceta</h5>
+													</div>
+
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<i class="align-middle" data-feather="layers"></i>
+														</div>
+													</div>
+												</div>
+												<h3 id="headTipo" class="mt-1 mb-3 text-info">----</h3>
+												
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
@@ -50,34 +82,38 @@
 												</form>
 											</div>
 										</div>
+									</div>
+									<div class="col-sm-4">
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
 														<h5 class="card-title">Bomba</h5>
 													</div>
-
+	
 													<div class="col-auto">
 														<div class="stat text-primary">
 															<i class="align-middle" data-feather="aperture"></i>
 														</div>
 													</div>
 												</div>
-												<h1 id="stateBomba" class="mt-1 mb-3">Encendido</h1>
+												<h1 id="stateBomba" class="mt-1 mb-3">----</h1>
 												<div class="mb-0">
 													<label class="form-check form-switch">
-														<input id="offOnBomba" class="form-check-input" type="checkbox" checked="">
+														<!-- <input id="offOnBomba" class="form-check-input" type="checkbox" checked=""> -->
+														<input id="offOnBomba" class="form-check-input" type="checkbox" >
 														<span class="form-check-label">Off / On</span>
 													</label>
 												</div>
 											</div>
 										</div>
+
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-xl-9 col-xxl-7">
+						<div class="col-xl-12 col-xxl-7">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
