@@ -174,11 +174,13 @@ class FirebaseService
 
     public function getHumedadAct($id_maceta)
     {
-        $reference = $this->db->getReference('jardin/maceta1/humedad/humedadAct');
+        $reference = $this->db->getReference('jardin/maceta1/humedad');
         $snapshot = $reference->getSnapshot();
+        $humedad = $snapshot->getValue();
+        $humedadAct = $humedad['humedadAct'];
+        $limite = $humedad['limite'];
+        $response = ['humedadAct' => $humedadAct, 'limite' => $limite];
 
-        $value = $snapshot->getValue();
-
-        return $value;
+        return $response;
     }
 }

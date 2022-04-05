@@ -156,7 +156,18 @@
 					url  : "{{route('humedadAct')}}",
 					data:  {'id_maceta': 'maceta1'},
 					success: function(response){
-						$('#getHumedadAct').text(`${response} Hr`);
+						let {humedadAct, limite} = response;
+						if(humedadAct > limite){
+							// rojo
+							$('#getHumedadAct').removeClass('text-success');
+							$('#getHumedadAct').addClass('text-danger');
+							$('#getHumedadAct').text(`${humedadAct} Hr`);
+						}else{
+							$('#getHumedadAct').removeClass('text-danger');
+							$('#getHumedadAct').addClass('text-success');
+							$('#getHumedadAct').text(`${humedadAct} Hr`);
+							// verde
+						}
 					}
 				});
 			}, 5000);
