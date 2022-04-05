@@ -22,6 +22,7 @@
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -121,6 +122,7 @@
 	<script src="{{ asset('admin/js/app.js') }}"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
 		function stateBomba(state){
 			$.ajax({
@@ -148,6 +150,36 @@
 					$('#stateBomba').text('Apagado')
 				}
 			})
+			setInterval(function(){
+				$.ajax({
+					type : 'POST',
+					url  : "{{route('humedadAct')}}",
+					data:  {'id_maceta': 'maceta1'},
+					success: function(response){
+						$('#getHumedadAct').text(`${response} Hr`);
+					}
+				});
+			}, 5000);
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url: 'dataTables/traductor.js',
+				dataType: 'script',
+				async: false
+			});    
+			let tableAdmin = $('#readHumedad').DataTable({
+				"ajax": {
+					"url": "{{route('getHistorico')}}",
+					"method": "POST"
+				},
+				"columns": [
+					{ "data": "fecha" },
+					{ "data": "valor"},
+				],
+			});
 		})
 	</script>
 

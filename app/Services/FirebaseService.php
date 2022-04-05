@@ -162,4 +162,23 @@ class FirebaseService
             'tipo' => $maceta->getTipo(),
         ]);
     }
+
+    public function getHistoricos(){
+        $reference = $this->db->getReference('jardin/maceta1/humedad/registros');
+        $snapshot = $reference->getSnapshot();
+
+        $value = $snapshot->getValue();
+
+        return $value;
+    }
+
+    public function getHumedadAct($id_maceta)
+    {
+        $reference = $this->db->getReference('jardin/maceta1/humedad/humedadAct');
+        $snapshot = $reference->getSnapshot();
+
+        $value = $snapshot->getValue();
+
+        return $value;
+    }
 }

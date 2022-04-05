@@ -14,6 +14,12 @@ class MacetaController extends Controller
         return view('agregar', ['dataProfile' => $dataUser]);
     }
 
+    public function historico(Request $request)
+    {
+        $dataUser = $request->session()->get('authenticated');
+        return view('historico', ['dataProfile' => $dataUser]);
+    }
+
     public function registrarMaceta(Request $request)
     {
         $admin = $request->input('admin');
@@ -22,5 +28,16 @@ class MacetaController extends Controller
         $limite = $request->input('limite');
         $data = Maceta::addMaceta($admin, $tipo, $id_sensor, intval($limite));
         return redirect()->back();
+    }
+
+    public function getRegistros(Request $request)
+    {
+        // $id_maceta = $request->id_maceta;
+        $data['data'] = [];
+        $data['data']['vista'] = 2;
+        $data['data']['fecha'] = '23-05-2022';
+        $data['data']['valor'] = 23;
+
+        return $data;
     }
 }

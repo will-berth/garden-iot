@@ -20,4 +20,11 @@ class HumedadController extends Controller
         Humedad::setState($id_maceta, intval($humMax));
         return redirect()->back();
     }
+
+    public function verHumedadAct(Request $request)
+    {
+        $id_maceta = $request->id_maceta;
+        $humedadActual = Humedad::humedadActual($id_maceta);
+        return $humedadActual;
+    }
 }

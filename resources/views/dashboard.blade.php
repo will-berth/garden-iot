@@ -33,7 +33,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3 text-success">29 Hr</h1>
+												<h1 id="getHumedadAct" class="mt-1 mb-3 text-success">-- Hr</h1>
 												<!-- <div class="mb-0">
 													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 36 </span>
 													<span class="text-muted">Limite maximo actual</span>

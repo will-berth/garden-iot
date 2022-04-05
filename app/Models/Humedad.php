@@ -17,4 +17,11 @@ class Humedad
         $updateHumMax = $service->setMaxHumedad($id_maceta, $humMax);
         return $updateHumMax;
     }
+
+    public static function humedadActual($id_maceta)
+    {
+        $service = new FirebaseService();
+        $response = $service->getHumedadAct($id_maceta);
+        return $response;
+    }
 }
